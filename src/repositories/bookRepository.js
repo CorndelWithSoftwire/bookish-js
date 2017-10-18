@@ -10,4 +10,16 @@ export default class BookRepository extends Repository {
                 })
             });
     }
+
+    getBookById(id) {
+        return this.db.one('SELECT * FROM books WHERE id = $1', id)
+            .then(book => {
+                return new Book(book.id, book.title, book.author, book.isbn);
+            });
+    }
+
+    addBook(book) {
+        return this.db.query('INSERT INTO books(title, author, isbn) VALUES($1, $2, $3)',
+            book.title, book.author, book.isbn);
+    }
 }
