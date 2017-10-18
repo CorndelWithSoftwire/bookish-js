@@ -1,7 +1,10 @@
 import UserRepository from '../repositories/userRepository';
-import { createTokenForUser, isTokenValid } from '../helpers/tokenHelper';
+import { createTokenForUser } from '../helpers/tokenHelper';
+import { secret } from "../config";
 
 import express from 'express';
+import passport from 'passport';
+import passportJwt from 'passport-jwt';
 
 const router = express.Router();
 const userRepo = new UserRepository();
@@ -12,7 +15,7 @@ router.get('/login', (req, res) => {
     if (!username || !password) {
         res.status(400).send({errors: ['Query params must contain both `username` and `password`']})
     } else {
-        userRepo.getUser(username, password)
+        userRepo.getAuthenticatedUser(username, password)
             .then(user => {
                 res.status(200).send({
                     message: `Welcome, ${user.displayName}!`,
@@ -28,16 +31,21 @@ router.get('/login', (req, res) => {
     }
 });
 
-router.use((req, res, next) => {
-    const token = req.headers['x-access-token'];
-    if (isTokenValid(token)) {
-        next();
-    } else {
-        return res.status(403).send({
-            success: false,
-            message: 'Invalid token'
-        });
-    }
-});
+
+passport.use(createJwtStrategy());
+router.use(passport.initialize());
+
+function createJwtStrategy() {
+    // Ensure that there is a valid JSON Web Token
+    const jwtOptions = {};
+    jwtOptions.jwtFromRequest = passportJwt.ExtractJwt.fromHeader('x-access-token');
+    jwtOptions.secretOrKey = secret;
+    return new passportJwt.Strategy(jwtOptions, (decodedJwt, next) => {
+        userRepo.getUser(decodedJwt.username)
+            .then(user => {
+                next(null, user);
+            });
+    })
+}
 
 export default router;
