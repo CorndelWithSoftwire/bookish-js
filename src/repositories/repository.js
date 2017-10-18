@@ -1,7 +1,11 @@
+import { dbConnectionString } from "../config";
+
 import pgp from 'pg-promise';
+
+const db = pgp(/*options*/)(dbConnectionString);
 
 export default class Repository {
     constructor() {
-        this.db = pgp(/*options*/)('postgres://corndel:corndel@localhost:5432/bookish');
+        this.db = db;
     }
 }

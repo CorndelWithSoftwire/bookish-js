@@ -1,15 +1,11 @@
-import BookRepository from './repositories/bookRepository';
+import ApiRouter from './routers/apiRouter';
+import AuthenticationRouter from './routers/authenticationRouter';
 
 import express from 'express';
 
 const app = express();
 
-app.get('/allbooks', (req, res) => {
-    const bookRepo = new BookRepository();
-    bookRepo.getAllBooks()
-        .then(books => {
-            res.send(books);
-        });
-});
+app.use('/', AuthenticationRouter);
+app.use('/', ApiRouter);
 
 app.listen(3000, () => console.log('\nBookish listening on port 3000'));
