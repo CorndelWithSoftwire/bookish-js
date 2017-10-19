@@ -13,7 +13,7 @@ class LoginController {
         const username = request.query.username;
         const password = request.query.password;
         if (!username || !password) {
-            response.status(400).send({errors: ['Query params must contain both `username` and `password`']})
+            response.status(400).send({errors: ['Must contain a `username` and `password`']})
         } else {
             User.findAll({ where: {username: username}})
                 .then(users => {
