@@ -1,8 +1,15 @@
-export default class Book {
-    constructor(id, title, author, isbn) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
-    }
-}
+import sequelize from './sequelize';
+
+import Sequelize from 'sequelize';
+
+const Book = sequelize.define('book', {
+        id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+        title: { type: Sequelize.STRING, allowNull: false },
+        author: { type: Sequelize.STRING, allowNull: false },
+        isbn: { type: Sequelize.STRING }
+    },
+    {
+        timestamps: false
+    });
+
+export default Book;

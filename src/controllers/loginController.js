@@ -1,11 +1,10 @@
-import UserRepository from '../repositories/userRepository';
+import User from '../models/user';
 import { createTokenForUser } from '../helpers/tokenHelper';
 
 import express from 'express';
 
 class LoginController {
     constructor() {
-        this.userRepository = new UserRepository();
         this.router = express.Router();
         this.router.get('/', this.login.bind(this));
     }
@@ -16,10 +15,12 @@ class LoginController {
         if (!username || !password) {
             response.status(400).send({errors: ['Query params must contain both `username` and `password`']})
         } else {
-            this.userRepository.getAuthenticatedUser(username, password)
-                .then(user => {
+            User.findAll({ where: {username: username}})
+                .then(users => {
+                    LoginController.ensureFirstUserHasCorrectPassword(users, password);
+                    const user = users[0];
                     response.status(200).send({
-                        message: `Welcome, ${user.displayName}!`,
+                        message: `Welcome, ${user.displayname}!`,
                         token: createTokenForUser(user)
                     });
                 })
@@ -29,6 +30,16 @@ class LoginController {
                         error.message
                     ]})
                 });
+        }
+    }
+
+    static ensureFirstUserHasCorrectPassword(users, password) {
+        if (!users.length) {
+            throw new Error('No user found with this username');
+        }
+        const user = users[0];
+        if (user.password !== password) {
+            throw new Error('Invalid password');
         }
     }
 }

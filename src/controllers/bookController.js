@@ -1,13 +1,10 @@
-import BookRepository from '../repositories/bookRepository';
 import Book from '../models/book';
 
 import express from 'express';
 import passport from 'passport';
-import Book from "../models/book";
 
 class BookController {
     constructor() {
-        this.bookRepository = new BookRepository();
         this.router = express.Router();
         this.router.get('/', passport.authenticate('jwt', {session: false}), this.getAllBooks.bind(this));
         this.router.get('/:id', passport.authenticate('jwt', {session: false}), this.getBook.bind(this));
@@ -15,7 +12,7 @@ class BookController {
     }
 
     getAllBooks(request, response) {
-        this.bookRepository.getAllBooks()
+        Book.findAll()
             .then(books => {
                 response.status(200).send(books);
             })
@@ -24,8 +21,11 @@ class BookController {
 
     getBook(request, response) {
         const id = request.params.id;
-        this.bookRepository.getBookById(id)
+        Book.findById(id)
             .then(book => {
+                if (!book) {
+                    return response.status(404).send({errors: ['Could not find book with id ' + id]})
+                }
                 response.status(200).send(book);
             })
             .catch(error => BookController.errorResponse(response, error));
@@ -34,9 +34,9 @@ class BookController {
     addBook(request, response) {
         const book = BookController.getBookFromRequest(request);
         if (!book) {
-            response.status(400).send({ errors: ['Invalid book']});
+            return response.status(400).send({ errors: ['Invalid book']});
         }
-        this.bookRepository.addBook(book)
+        Book.create(book)
             .then(() => {
                 response.status(200).send({success: true, message: 'Book added successfully'});
             })
@@ -48,13 +48,14 @@ class BookController {
     }
 
     static getBookFromRequest(request) {
+        console.log(request.body);
         const title = request.body.title;
         const author = request.body.author;
         const isbn = request.body.isbn;
         if (!title || !author) {
             return null;
         }
-        return new Book(title, author, isbn);
+        return {title: title, author: author, isbn: isbn};
     }
 }
 
