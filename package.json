@@ -1,0 +1,27 @@
+{
+  "name": "bookish",
+  "version": "1.0.0",
+  "description": "Bookish using mssql",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel ./ --out-dir dist/ --ignore ./.git,./node_modules,./.babelrc,./package.json,./npm-debug.log,./sql,./README.md ",
+    "start": "npm run build && node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CorndelWithSoftwire/bookish-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CorndelWithSoftwire/bookish-js/issues"
+  },
+  "homepage": "https://github.com/CorndelWithSoftwire/bookish-js#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.14",
+    "@babel/node": "^7.13.13",
+    "@babel/preset-env": "^7.13.12"
+  }
+}
