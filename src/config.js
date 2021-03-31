@@ -9,5 +9,7 @@ export const mssqlConnectionConfig = {
     }
 };
 
+export const secret = 'bookish-secret';
+
 
 

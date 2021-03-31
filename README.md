@@ -34,4 +34,12 @@ npm i express
 npm install mssql
 
 
+
 Copyright © 2017 Softwire - All Rights Reserved
+
+## Setting up Part 4
+
+### Install JWT
+
+npm i jsonwebtoken
+
