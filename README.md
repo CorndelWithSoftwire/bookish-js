@@ -29,7 +29,9 @@ Note: no --copy-files needed, and if included takes precendence over --ignore
 
 npm i express
 
+### Enable MS SQL Server access 
 
+npm install mssql
 
 
 Copyright © 2017 Softwire - All Rights Reserved
