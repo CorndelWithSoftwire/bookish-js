@@ -4,7 +4,7 @@
   "description": "Bookish using mssql",
   "main": "index.js",
   "scripts": {
-    "build": "babel ./ --out-dir dist/ --ignore ./.git,./node_modules,./.babelrc,./package.json,./npm-debug.log,./sql,./README.md ",
+    "build": "babel ./src --out-dir dist/ --ignore ./.git,./node_modules,./.babelrc,./package.json,./npm-debug.log,./sql,./README.md ",
     "start": "npm run build && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,5 +23,8 @@
     "@babel/core": "^7.13.14",
     "@babel/node": "^7.13.13",
     "@babel/preset-env": "^7.13.12"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
