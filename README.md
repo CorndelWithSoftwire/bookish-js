@@ -43,3 +43,6 @@ Copyright © 2017 Softwire - All Rights Reserved
 
 npm i jsonwebtoken
 
+### Install passport
+
+npm i passport passport-jwt

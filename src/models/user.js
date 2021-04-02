@@ -1,9 +1,9 @@
 
 
 export default class User {
-    constructor(username, displayName, password) {
+    constructor(username, displayName) {
         this.username = username;
         this.displayName = displayName;
-        this.password = password;
+        // keep password hidden
     }
 }

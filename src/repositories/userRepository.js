@@ -3,17 +3,32 @@ import {executeSql} from '../helpers/dbHelper';
 import User from '../models/user';
 
 export default class UserRepository {
+    // validate username/password
     getUser(username, password) {
-        return executeSql('SELECT * FROM users WHERE username = @username AND password = @password', 
+        return executeSql('SELECT users.username, users.displayname  FROM users WHERE username = @username AND password = @password', 
                                           { "username": username, "password": password} )
             .then(result => {
-                console.log("result " + JSON.stringify(result) );
                 let user = result.recordset[0];
                 if ( (!! user) ) {
-                    return new User(user.username, user.displayname, user.password);
+                    return new User(user.username, user.displayname);
                 } else {
                     throw new Error('Invalid Username or Password');
                 }
             });
+    }
+
+    // is this a valid username
+    getUserByName(username) {
+        return executeSql('SELECT users.username, users.displayname FROM users WHERE username = @username ' , 
+                                          { "username": username } )
+            .then(result => {
+                let user = result.recordset[0];
+                if ( (!! user) ) {
+                    return new User(user.username, user.displayname);
+                } else {
+                    throw new Error('No such user ' + username);
+                }
+            });
+
     }
 }
