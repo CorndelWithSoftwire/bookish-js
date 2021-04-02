@@ -46,3 +46,9 @@ npm i jsonwebtoken
 ### Install passport
 
 npm i passport passport-jwt
+
+Notes:
+
+- Passport code all in index.js, controllers not aware of passport
+- Passport passes user information in request to controllers
+- User object does not contain password, checking done in database not in cod

@@ -4,7 +4,7 @@ import User from '../models/user';
 
 export default class UserRepository {
     // validate username/password
-    getUser(username, password) {
+    getAuthenticatedUser(username, password) {
         return executeSql('SELECT users.username, users.displayname  FROM users WHERE username = @username AND password = @password', 
                                           { "username": username, "password": password} )
             .then(result => {
