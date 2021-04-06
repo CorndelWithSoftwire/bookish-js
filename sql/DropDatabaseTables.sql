@@ -12,3 +12,6 @@ GO
 DROP  TABLE books 
 GO
 
+DROP TABLE users
+GO
+

@@ -13,10 +13,19 @@ GO
 CREATE TABLE copies (
 	id int IDENTITY NOT NULL PRIMARY KEY, -- This is used as the barcode, which will be printed and stuck on the book copy
 	bookid int,
-	borrower nvarchar(MAX) NULL, -- Only set if the book is borrowed
+	borrower nvarchar(20) NULL, -- Only set if the book is borrowed
 	duedate datetime NULL -- Only set if the book is borrowed
 )
 GO
 
+CREATE TABLE users (
+	username nvarchar(20) NOT NULL PRIMARY KEY,
+	displayname nvarchar(200) NOT NULL,
+	password nvarchar(100) NOT NULL
+)
+
+GO
+
 ALTER TABLE copies ADD CONSTRAINT fk_copies_book FOREIGN KEY (bookid) REFERENCES Books (id)
 GO
+ALTER TABLE copies ADD CONSTRAINT fk_copies_users FOREIGN KEY (borrower) REFERENCES users (username);

@@ -34,5 +34,24 @@
         );
     }
 
+    function beginTransaction(){
+        return dbConnection.then( (pool)  => {
+            const transaction = new mssql.Transaction(pool);
+            return transaction.begin();
+        });
+    }
+   
+    function executeSqlInTransaction(transaction, queryString, parameters){
+               
+        let request = new mssql.Request(transaction);
 
-export { executeSql};
+        if ( parameters ) { 
+            Object.keys(parameters).forEach(
+                k => request = request.input(k, parameters[k])
+            );
+        }
+
+        return request.query( queryString );
+    }
+
+export { executeSql, beginTransaction, executeSqlInTransaction};

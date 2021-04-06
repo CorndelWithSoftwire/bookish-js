@@ -29,6 +29,7 @@
     "jsonwebtoken": "^8.5.1",
     "mssql": "^6.3.1",
     "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "promise-sequential": "^1.1.1"
   }
 }
