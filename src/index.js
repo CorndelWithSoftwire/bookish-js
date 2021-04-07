@@ -1,4 +1,5 @@
 import BookController from './controllers/bookController';
+import LoanController from './controllers/loanController';
 import LoginController from './controllers/loginController';
 import UserRepository from "./repositories/userRepository";
 import { secret } from './config';
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 
 app.use('/login', LoginController);
 app.use('/books', passport.authenticate('jwt', {session: false}), BookController);
+app.use('/loans', passport.authenticate('jwt', {session: false}), LoanController);
 
 // handle errors, log diagnostic, give user simple error message
 app.use(function (err, req, res, next) {
