@@ -1,6 +1,5 @@
-
-const config = {  
-    mssqlConnectionConfig : {
+const config = {
+    mssqlConnectionConfig: {
         user: 'sa',
         password: 'DaveDockedSoftwire2021',
         server: 'localhost', // You can use 'localhost\\instance' to connect to named instance
@@ -9,8 +8,7 @@ const config = {
             "enableArithAbort": true
         }
     },
-    secret : 'bookish-secret'
+    secret: 'bookish-secret'
 };
 
-module.export = config
-
+module.exports = config
