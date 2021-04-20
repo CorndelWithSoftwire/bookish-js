@@ -1,13 +1,13 @@
-import BookController from './controllers/bookController';
-import LoanController from './controllers/loanController';
-import LoginController from './controllers/loginController';
-import UserRepository from "./repositories/userRepository";
-import { secret } from './config';
+const BookController = require('./controllers/bookController.js');
+const LoginController = require('./controllers/loginController');
+const UserRepository = require('./repositories/userRepository');
+const config  = require('./config');
+const secret = config.secret;
 
-import express from 'express';
-import bodyParser from "body-parser";
-import passport from 'passport';
-import passportJwt from 'passport-jwt';
+const express = require('express');
+const bodyParser = require( "body-parser" );
+const passport = require('passport');
+const passportJwt = require('passport-jwt');
 
 const app = express();
 
@@ -18,7 +18,6 @@ app.use(bodyParser.json());
 
 app.use('/login', LoginController);
 app.use('/books', passport.authenticate('jwt', {session: false}), BookController);
-app.use('/loans', passport.authenticate('jwt', {session: false}), LoanController);
 
 // handle errors, log diagnostic, give user simple error message
 app.use(function (err, req, res, next) {
