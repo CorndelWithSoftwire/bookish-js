@@ -1,7 +1,8 @@
-import BookRepository from '../repositories/bookRepository';
-import Book from '../models/book';
 
-import express from 'express';
+const BookRepository = require( '../repositories/bookRepository');
+const Book = require( '../models/book');
+
+const express = require( 'express');
 
 class BookController {
     constructor() {
@@ -87,4 +88,4 @@ class BookController {
 
 }
 
-export default new BookController().router;
+module.exports = new BookController().router;

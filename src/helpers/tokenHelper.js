@@ -1,12 +1,14 @@
-import { secret } from "../config";
 
-import jwt from 'jsonwebtoken';
+const config  = require( "../config");
+const secret = config.secret;
 
-export function createTokenForUser(user) {
+const jwt = require('jsonwebtoken');
+
+function createTokenForUser(user) {
     return jwt.sign({ username: user.username }, secret);
 }
 
-export function isTokenValid(token) {
+function isTokenValid(token) {
     if (!token) {
         return false;
     }
@@ -17,3 +19,9 @@ export function isTokenValid(token) {
         return false;
     }
 }
+
+module.exports = {
+    "createTokenForUser": createTokenForUser,
+    "isTokenValid" : isTokenValid
+}
+

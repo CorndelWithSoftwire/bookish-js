@@ -1,7 +1,7 @@
-import UserRepository from '../repositories/userRepository';
-import { createTokenForUser } from '../helpers/tokenHelper';
+const UserRepository = require('../repositories/userRepository');
+const  createTokenForUser  = require('../helpers/tokenHelper');
 
-import express from 'express';
+const express = require('express') ;
 
 class LoginController {
     constructor() {
@@ -33,4 +33,4 @@ class LoginController {
     }
 }
 
-export default new LoginController().router;
+module.exports = new LoginController().router;

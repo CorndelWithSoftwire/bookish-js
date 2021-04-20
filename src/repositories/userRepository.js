@@ -1,8 +1,10 @@
 
-import {executeSql} from '../helpers/dbHelper';
-import User from '../models/user';
+const executeSql = require( '../helpers/dbHelper');
+const User = require('../models/user');
 
-export default class UserRepository {
+class UserRepository {
+    constructor() { this.type = "UserRepository" }
+
     // validate username/password
     getAuthenticatedUser(username, password) {
         return executeSql('SELECT users.username, users.displayname  FROM users WHERE username = @username AND password = @password', 
@@ -31,4 +33,6 @@ export default class UserRepository {
             });
 
     }
-}
+};
+
+module.exports =  UserRepository ;
