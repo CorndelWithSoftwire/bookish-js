@@ -1,5 +1,5 @@
 
-const executeSql = require( '../helpers/dbHelper');
+const dbHelper = require( '../helpers/dbHelper');
 const User = require('../models/user');
 
 class UserRepository {
@@ -7,7 +7,7 @@ class UserRepository {
 
     // validate username/password
     getAuthenticatedUser(username, password) {
-        return executeSql('SELECT users.username, users.displayname  FROM users WHERE username = @username AND password = @password', 
+        return dbHelper.executeSql('SELECT users.username, users.displayname  FROM users WHERE username = @username AND password = @password', 
                                           { "username": username, "password": password} )
             .then(result => {
                 let user = result.recordset[0];
@@ -21,7 +21,7 @@ class UserRepository {
 
     // is this a valid username
     getUserByName(username) {
-        return executeSql('SELECT users.username, users.displayname FROM users WHERE username = @username ' , 
+        return dbHelper.executeSql('SELECT users.username, users.displayname FROM users WHERE username = @username ' , 
                                           { "username": username } )
             .then(result => {
                 let user = result.recordset[0];
