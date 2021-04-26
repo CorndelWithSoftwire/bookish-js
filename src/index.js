@@ -13,11 +13,14 @@ const app = express();
 
 configurePassportToAuthenticateTokens();
 
+app.use(express.static('ux'));
+
 app.use(passport.initialize());
 app.use(bodyParser.json());
 
 app.use('/login', LoginController);
-app.use('/books', passport.authenticate('jwt', { session: false }), BookController);
+app.use('/books', BookController);
+//app.use('/books', passport.authenticate('jwt', { session: false }), BookController);
 
 // handle errors, log diagnostic, give user simple error message
 app.use(function(err, req, res, next) {
