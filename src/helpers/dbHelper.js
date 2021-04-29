@@ -3,7 +3,8 @@
 const config = require("../config");
 const mssqlConnectionConfig = config.mssqlConnectionConfig;
 
-const mssql = require('mssql');
+const mssql = require('mssql/msnodesqlv8');
+
 
 const dbPool = new mssql.ConnectionPool(mssqlConnectionConfig)
 dbPool.on('error', err => {

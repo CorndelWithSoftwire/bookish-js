@@ -1,6 +1,6 @@
 
 
-USE bookish
+USE bookish1
 GO
 
 CREATE TABLE books (

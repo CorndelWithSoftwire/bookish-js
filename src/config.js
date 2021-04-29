@@ -1,10 +1,12 @@
 const config = {
     mssqlConnectionConfig: {
-        user: 'sa',
-        password: 'DaveDockedSoftwire2021',
-        server: 'localhost', // You can use 'localhost\\instance' to connect to named instance
-        database: 'bookish',
+        //user: 'ZOO\DAVART',
+        //password: 'DaveDockedSoftwire2021',
+        server: 'localhost\\SQLEXPRESS', // You can use 'localhost\\instance' to connect to named instance
+        database: 'bookish1',
+        driver: 'msnodesqlv8',
         options: {
+            "trustedConnection": true,
             "enableArithAbort": true
         }
     },
