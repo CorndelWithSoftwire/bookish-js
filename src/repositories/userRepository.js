@@ -1,5 +1,4 @@
-
-const dbHelper = require( '../helpers/dbHelper');
+const dbHelper = require('../helpers/dbHelper');
 const User = require('../models/user');
 
 class UserRepository {
@@ -7,11 +6,10 @@ class UserRepository {
 
     // validate username/password
     getAuthenticatedUser(username, password) {
-        return dbHelper.executeSql('SELECT users.username, users.displayname  FROM users WHERE username = @username AND password = @password', 
-                                          { "username": username, "password": password} )
+        return dbHelper.executeSql('SELECT users.username, users.displayname  FROM users WHERE username = @username AND password = @password', { "username": username, "password": password })
             .then(result => {
                 let user = result.recordset[0];
-                if ( (!! user) ) {
+                if ((!!user)) {
                     return new User(user.username, user.displayname);
                 } else {
                     throw new Error('Invalid Username or Password');
@@ -21,12 +19,12 @@ class UserRepository {
 
     // is this a valid username
     getUserByName(username) {
-        return dbHelper.executeSql('SELECT users.username, users.displayname FROM users WHERE username = @username ' , 
-                                          { "username": username } )
+        return dbHelper.executeSql('SELECT users.username, users.displayname FROM users WHERE username = @username ', { "username": username })
             .then(result => {
-                let user = result.recordset[0];
-                if ( (!! user) ) {
-                    return new User(user.username, user.displayname);
+                let users = result.recordsets[0];
+                if ((users.length > 0)) {
+                    let user = users[0];
+                    return new User(users.username, user.displayname);
                 } else {
                     throw new Error('No such user ' + username);
                 }
@@ -35,4 +33,4 @@ class UserRepository {
     }
 };
 
-module.exports =  UserRepository ;
+module.exports = UserRepository;

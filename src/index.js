@@ -17,6 +17,7 @@ app.use(passport.initialize());
 app.use(bodyParser.json());
 
 app.use('/login', LoginController);
+app.use('/', passport.authenticate('jwt', { session: false }));
 app.use('/books', BookController);
 
 // handle errors, log diagnostic, give user simple error message
