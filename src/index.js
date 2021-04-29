@@ -6,18 +6,18 @@ const secret = config.secret;
 
 const express = require('express');
 const bodyParser = require("body-parser");
-const passport = require('passport');
-const passportJwt = require('passport-jwt');
+// const passport = require('passport');
+// const passportJwt = require('passport-jwt');
 
 const app = express();
 
-configurePassportToAuthenticateTokens();
+// configurePassportToAuthenticateTokens();
 
-app.use(passport.initialize());
+// app.use(passport.initialize());
 app.use(bodyParser.json());
 
 app.use('/login', LoginController);
-app.use('/', passport.authenticate('jwt', { session: false }));
+// app.use('/', passport.authenticate('jwt', { session: false }));
 app.use('/books', BookController);
 
 // handle errors, log diagnostic, give user simple error message
@@ -28,6 +28,7 @@ app.use(function(err, req, res, next) {
 
 app.listen(3000, () => console.log('\nBookish listening on port 3000'));
 
+/*
 function configurePassportToAuthenticateTokens() {
     // Ensure that there is a valid JSON Web Token
     const jwtOptions = {};
@@ -41,3 +42,4 @@ function configurePassportToAuthenticateTokens() {
             }).catch(e => next(null, null, e));
     }));
 }
+*/
