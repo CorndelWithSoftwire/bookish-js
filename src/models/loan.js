@@ -1,7 +1,7 @@
 
 export default class Loan {
     constructor(bookId, copyId, title, author, isbn, user, returnDate) {
-        this.bookId = bookIdd;
+        this.bookId = bookId;
         this.copyId = copyId;
         this.title = title;
         this.author = author;
