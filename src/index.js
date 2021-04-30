@@ -1,23 +1,24 @@
 const BookController = require('./controllers/bookController');
-const LoginController = require('./controllers/loginController');
-const UserRepository = require('./repositories/userRepository');
+const AuthController = require('./controllers/authController.js');
+const UxController = require('./controllers/uxController.js');
 const config = require('./config');
-const secret = config.secret;
 
 const express = require('express');
 const bodyParser = require("body-parser");
-const passport = require('passport');
-const passportJwt = require('passport-jwt');
+const cookieParser = require('cookie-parser');
+const nocache = require('nocache');
 
 const app = express();
 
-configurePassportToAuthenticateTokens();
+// disable caching
+app.use(nocache());
+app.set('etag', false); 
 
-app.use(passport.initialize());
-app.use(bodyParser.json());
+app.use(cookieParser());
 
-app.use('/login', LoginController);
-app.use('/books', passport.authenticate('jwt', { session: false }), BookController);
+app.use('/', AuthController  );
+app.use('/books', BookController);
+app.use('/ux', UxController);
 
 // handle errors, log diagnostic, give user simple error message
 app.use(function(err, req, res, next) {
@@ -26,17 +27,3 @@ app.use(function(err, req, res, next) {
 })
 
 app.listen(3000, () => console.log('\nBookish listening on port 3000'));
-
-function configurePassportToAuthenticateTokens() {
-    // Ensure that there is a valid JSON Web Token
-    const jwtOptions = {};
-    jwtOptions.jwtFromRequest = passportJwt.ExtractJwt.fromHeader('x-access-token');
-    jwtOptions.secretOrKey = secret;
-    const userRepository = new UserRepository();
-    passport.use(new passportJwt.Strategy(jwtOptions, (decodedJwt, next) => {
-        userRepository.getUserByName(decodedJwt.username)
-            .then(user => {
-                next(null, user);
-            }).catch(e => next(null, null, e));
-    }));
-}

@@ -25,9 +25,13 @@
     "@babel/preset-env": "^7.13.12"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
+    "fs.promises": "^0.1.2",
     "jsonwebtoken": "^8.5.1",
     "mssql": "^6.3.1",
+    "mustache": "^4.2.0",
+    "nocache": "^2.1.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "promise-sequential": "^1.1.1"

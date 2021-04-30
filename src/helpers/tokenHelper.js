@@ -20,7 +20,21 @@ function isTokenValid(token) {
     }
 }
 
+
+function getTokenInfo(token) {
+    if (!token) {
+        return null;
+    }
+    try {
+        const decoded = jwt.verify(token, secret);
+        return decoded;
+    } catch (e) {
+        return false;
+    }
+}
+
 module.exports = {
+    "getTokenInfo": getTokenInfo,
     "createTokenForUser": createTokenForUser,
     "isTokenValid" : isTokenValid
 }
