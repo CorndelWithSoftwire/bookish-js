@@ -4,11 +4,14 @@ const UxController = require('./controllers/uxController.js');
 const config = require('./config');
 
 const express = require('express');
-const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 const nocache = require('nocache');
 
+
 const app = express();
+
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true }));
 
 // disable caching
 app.use(nocache());

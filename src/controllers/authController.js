@@ -1,19 +1,22 @@
 
 const UserRepository = require( '../repositories/userRepository');
 const  TokenHelper  = require('../helpers/tokenHelper');
+const renderPage = require('../helpers/pageHelper');
 const express = require('express');
 
 class AuthController {
     constructor() {
         this.userRepository = new UserRepository();
         this.router = express.Router();
-        this.router.get('/login', (request, response) => this.login(request, response) );
+        this.router.get('/login', (request, response) => renderPage(request, response, "ux/html/login.html") );
+        this.router.post('/login', (request, response) => this.login(request, response) );
         this.router.use((request, response, next) => this.authCheck(request, response, next) );
     }
 
+
     login(request, response) {
-        const username = request.query.username;
-        const password = request.query.password;
+        const username = request.body.username;
+        const password = request.body.password;
         if (!username || !password) {
             response.status(400).send({errors: ['Specify both `username` and `password`']})
         } else {
@@ -21,10 +24,7 @@ class AuthController {
                 .then(user => {
                     let token = TokenHelper.createTokenForUser(user);
                     response.cookie('bookishjwt', token, { expires: new Date(Date.now() + 900000), httpOnly: true })
-                    response.status(200).send({
-                        message: `Welcome, ${user.displayName}!`,
-                        token: token
-                    });
+                    response.redirect('/ux/home');
                 })
                 .catch(error => {
                     response.status(400).send({errors: [
@@ -54,10 +54,8 @@ class AuthController {
                     } );
            });
         } else {
-            return response.status(403).send({
-                success: false,
-                message: 'Invalid token'
-            });
+            response.redirect('/login');
+            return;
         }
     }
 

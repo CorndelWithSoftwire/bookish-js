@@ -1,7 +1,7 @@
 
-const fsp = require("fs.promises");
+
 const express = require('express');
-const Mustache = require('mustache');
+const renderPage = require('../helpers/pageHelper');
 
 class UxController {
     constructor() {
@@ -15,17 +15,9 @@ class UxController {
             user: request.bookishUser.username,
             name: request.bookishUser.displayName
         };
-        this.renderPage(request, response, "ux/html/home.html", userInfo);
+        renderPage(request, response, "ux/html/home.html", userInfo);
     }
 
-    renderPage(request, response, page, data) {
-        fsp.readFile(page, 'utf8').then(
-            (pageTemplate) => {
-                let pageHtml = Mustache.render(pageTemplate, data);
-                response.status(200).send(pageHtml);
-            }
-        ).catch((e) => this.errorResponse(response, e));
-    }
 
     errorResponse(response, error, statusCode){
         if ( ! statusCode ){
