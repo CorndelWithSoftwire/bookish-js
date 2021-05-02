@@ -1,54 +1,26 @@
 # bookish-js
-Model answer to the Book(ish) challenge in JS
 
-## Setting up Part 2
+This branch is intended to work towards creating a Vue front-end that uses the bookish REST services running against an mssql database.
 
-### Add Babel 
+The sql folder contains SQL scripts to create and populate the database.
 
-```
-npm i @babel/cli @babel/node @babel/core @babel/preset-env --save-dev
-```
-
-.babelrc
+The src folder contains a node application that exposes teh REST services and also can be used to service the Vue front-end.
 
 ```
-{
-  "presets": ["@babel/preset-env"]
-}
+    cd src
+    npm install
+    node index.js
 ```
 
-package.json
+You can then GET from these URLs
 
-```
-"build": "babel ./ --out-dir dist/ --ignore ./.git,./node_modules,./.babelrc,./package.json,./npm-debug.log,./sql,./README.md "
-```
+http://localhost:3000/books
+http://localhost:3000/books/34
 
-Note: no --copy-files needed, and if included takes precendence over --ignore
+and browse to 
 
-### Add express
-
-npm i express
-
-### Enable MS SQL Server access 
-
-npm install mssql
+http://localhost:3000/vue/html/home.html
 
 
 
-Copyright © 2017 Softwire - All Rights Reserved
 
-## Setting up Part 4
-
-### Install JWT
-
-npm i jsonwebtoken
-
-### Install passport
-
-npm i passport passport-jwt
-
-Notes:
-
-- Passport code all in index.js, controllers not aware of passport
-- Passport passes user information in request to controllers
-- User object does not contain password, checking done in database not in cod
