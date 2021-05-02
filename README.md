@@ -4,7 +4,7 @@ This branch is intended to work towards creating a Vue front-end that uses the b
 
 The sql folder contains SQL scripts to create and populate the database.
 
-The src folder contains a node application that exposes teh REST services and also can be used to service the Vue front-end.
+The src folder contains a node application that exposes the REST services and also can be used to service the Vue front-end.
 
 ```
     cd src
