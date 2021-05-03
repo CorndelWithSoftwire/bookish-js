@@ -9,8 +9,9 @@
 <body>
 
   <div id="bookTable">
+    <P><input v-model="filter"></P>
     <ol>
-      <book-item v-for="item in bookList" v-bind:book="item" v-bind:key="item.id"></book-item>
+      <book-item v-for="item in filteredBookList" v-bind:book="item" v-bind:key="item.id"></book-item>
     </ol>
   </div>
 
@@ -25,6 +26,18 @@
 
     var bookishApp = new Vue({
       el: '#bookTable',
+      created: function () {
+        // `this` points to the vm instance
+        console.log('book[0] is: ' + this.bookList[0].title);
+      },
+      computed: {
+        // a computed getter
+        filteredBookList: function () {
+          // `this` points to the vm instance
+          let toMatch = this.filter;
+          return this.bookList.filter( b => ( b.title.includes(toMatch)));
+        }
+      },
       data: {
         filter: "",
         bookList: [{
