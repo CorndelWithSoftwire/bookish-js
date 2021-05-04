@@ -5,7 +5,11 @@ const config = require('./config');
 const express = require('express');
 const nocache = require('nocache');
 
+
 const app = express();
+
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true }));
 
 // disable caching
 app.use(nocache());
