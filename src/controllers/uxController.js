@@ -7,6 +7,7 @@ class UxController {
     constructor() {
         this.router = express.Router();
         this.router.get('/home', (request, response) => this.getHome(request, response));
+        this.router.get('/catalogue', (request, response) => this.getCatalogue(request, response));
     }
 
     getHome(request, response) {
@@ -15,6 +16,17 @@ class UxController {
             name: "Mock User"
         };
         this.renderPage(request, response, "ux/html/home.html", userInfo);
+    }
+
+    getCatalogue(request, response) {
+        var data = {
+            userInfo : {
+                user: "unknown",
+                name: "Mock User"
+            },
+            books: []
+        }
+        this.renderPage(request, response, "ux/html/catalogue.html", data);
     }
 
     renderPage(request, response, page, data) {
