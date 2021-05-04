@@ -22,21 +22,21 @@ class UxController {
     }
 
     getCatalogue(request, response) {
-      
+
         const userInfo = {
-                user: "unknown",
-                name: "Mock User"
-            }
+            user: "unknown",
+            name: "Mock User"
+        }
 
         this.bookRepository.getAllBooks()
-        .then(books => {
-            const catalogueData = {
-                userInfo: userInfo,
-                books: books
-            };
-            renderPage(request, response, "ux/html/catalogue.html", catalogueData);
-        }
-        );
+            .then(books => {
+                const catalogueData = {
+                    userInfo: userInfo,
+                    books: books
+                };
+                renderPage(request, response, "ux/html/catalogue.html", catalogueData);
+            }
+            );
     }
 
     renderPage(request, response, page, data) {
