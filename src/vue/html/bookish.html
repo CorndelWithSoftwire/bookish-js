@@ -34,8 +34,7 @@
         // a computed getter
         filteredBookList: function () {
           // `this` points to the vm instance
-          let toMatch = this.filter;
-          return this.bookList.filter( b => ( b.title.includes(toMatch)));
+          return this.bookList.filter( b => ( b.title.includes(this.filter)));
         }
       },
       data: {
