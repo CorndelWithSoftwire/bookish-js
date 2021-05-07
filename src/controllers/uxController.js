@@ -26,7 +26,8 @@ class UxController {
             },
             books: [
                 { "author": "Richard Thompson", "title" : "Beeswing"},
-                { "author": "P.G.Bell", "title" : "The Train to Impossible Places"}
+                { "author": "P.G.Bell", "title" : "The Train to Impossible Places"},
+                { "author": "Georgina Haydn", "title" : "Taverna"}
             ]
         }
         this.renderPage(request, response, "ux/html/catalogue.html", data);
