@@ -1,23 +1,28 @@
 
+
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
 <head>
 
-<title>Bookish Catalogie</title>
+<title>Bookish Catalogue</title>
 </head>
 
 <body>
 	
 	<div id="holder" class="ui grid">
-           <H1>Bookish For ... </H1>
+           <H1>Bookish Catalogue For User: {{userInfo.user}} Name: {{userInfo.name}} </H1>
 	</div>
 
-        <div >
-            <P>list of books goes here<P>
-            <table id="bookTable" class="display" ></table>
-        </div>
+      <table>
+      <tr></tr>
+      {{#books}}
+      <tr>
+          <td>{{author}}</td>
+          <td>{{title}}</td>
+      </tr>
+      {{/books}}
+      </table>
 
 </body>
 </html>
-

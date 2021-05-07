@@ -24,7 +24,10 @@ class UxController {
                 user: "unknown",
                 name: "Mock User"
             },
-            books: []
+            books: [
+                { "author": "Richard Thompson", "title" : "Beeswing"},
+                { "author": "P.G.Bell", "title" : "The Train to Impossible Places"}
+            ]
         }
         this.renderPage(request, response, "ux/html/catalogue.html", data);
     }
