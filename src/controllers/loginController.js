@@ -1,5 +1,5 @@
 const UserRepository = require('../repositories/userRepository');
-const  createTokenForUser  = require('../helpers/tokenHelper');
+const  tokenHelper  = require('../helpers/tokenHelper');
 
 const express = require('express') ;
 
@@ -7,7 +7,7 @@ class LoginController {
     constructor() {
         this.userRepository = new UserRepository();
         this.router = express.Router();
-        this.router.get('/', this.login.bind(this));
+        this.router.get('/', (request, response) => this.login(request, response) );
     }
 
     login(request, response) {
@@ -20,7 +20,7 @@ class LoginController {
                 .then(user => {
                     response.status(200).send({
                         message: `Welcome, ${user.displayName}!`,
-                        token: createTokenForUser(user)
+                        token: tokenHelper.createTokenForUser(user)
                     });
                 })
                 .catch(error => {
