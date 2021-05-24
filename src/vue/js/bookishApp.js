@@ -15,11 +15,10 @@ let bookishApp = new Vue({
         <ol>
             <book-item v-for="book in filteredBookList" 
                       v-bind:book="book" 
-                      v-on:book-selected="selectBook(book)"
                       >
             </book-item>
         </ol>
-        <book-details v-bind:bookDetails="selectedBook"></book-details>
+        <book-details v-bind:bookDetails="bookList[0]"></book-details>
     </div>
     `,
     methods: {
