@@ -15,6 +15,7 @@ let bookishApp = new Vue({
         <ol>
             <book-item v-for="book in filteredBookList" 
                       v-bind:book="book" 
+                      v-bind:key="book.id"
                       >
             </book-item>
         </ol>
