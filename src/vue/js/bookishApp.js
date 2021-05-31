@@ -22,15 +22,6 @@ let bookishApp = new Vue({
         <book-details v-bind:bookDetails="bookList[0]"></book-details>
     </div>
     `,
-    methods: {
-        selectBook : function(selectedBook) {
-            console.log("clicked " + selectedBook);
-            this.selectedBookIndex = this.bookList.findIndex( (candidateBook) => {
-                return candidateBook.id === selectedBook.id;
-            })
-            console.log("clicked " + this.selectedBookIndex);
-        }
-    },
     computed: {
         // a computed getter
         filteredBookList: function () {
