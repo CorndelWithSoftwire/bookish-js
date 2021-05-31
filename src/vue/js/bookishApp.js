@@ -18,11 +18,13 @@ let bookishApp = new Vue({
             <book-item v-for="book in filteredBookList" 
                       v-bind:book="book" 
                       v-bind:key="book.id"
+                      v-on:book-selected="selectBook"
                       >
             </book-item>
         </ol>
-        <book-details id="details" v-bind:bookDetails="bookList[0]"></book-details>
-        <book-review id="review" v-bind:bookDetails="bookList[0]"></book-review>
+
+        <book-details v-if="showDetails" v-bind:bookDetails="selectedBook"></book-details>
+        <book-review v-if="!showDetails" v-bind:bookDetails="selectedBook"></book-review>
     </div>
     `,
     computed: {
@@ -30,16 +32,22 @@ let bookishApp = new Vue({
         filteredBookList: function () {
             // `this` points to the vm instance
             return this.bookList.filter(b => (b.title.includes(this.filter)));
-        },
-        selectedBook: function () {
-            return this.bookList[this.selectedBookIndex]
+        }
+
+    },
+    methods:{
+        selectBook : function(clickedBook) {
+            Object.assign( this.selectedBook, clickedBook);
+            this.showDetails = !this.showDetails;
         }
 
     },
     data() {
         return {
             filter: "",
-            selectedBookIndex: 0,
+            showDetails: true,
+            showReview: false,
+            selectedBook: { author: "", title:"", id: "", isbn: ""},
             bookList: [{
                 "id": 15,
                 "title": "Build Your Own Database Driven Website Using PHP and MySQL",
