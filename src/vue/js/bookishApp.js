@@ -2,12 +2,14 @@
 
 import BookItem from "./book-item.js";
 import BookDetails from "./book-details.js";
+import BookReview from "./book-review.js";
 
 let bookishApp = new Vue({
     el: '#bookishApp',
     components: {
         BookItem,
-        BookDetails
+        BookDetails,
+        BookReview
     },
     template: `
     <div>
@@ -19,7 +21,8 @@ let bookishApp = new Vue({
                       >
             </book-item>
         </ol>
-        <book-details v-bind:bookDetails="bookList[0]"></book-details>
+        <book-details id="details" v-bind:bookDetails="bookList[0]"></book-details>
+        <book-review id="review" v-bind:bookDetails="bookList[0]"></book-review>
     </div>
     `,
     computed: {
