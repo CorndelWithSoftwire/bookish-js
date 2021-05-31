@@ -29,6 +29,12 @@ let bookishApp = new Vue({
         },
         updateBook : function(updatedDetails) {
             console.log("need to update list " + JSON.stringify(updatedDetails) );
+            let updateIndex =  this.bookList.findIndex( 
+                   ( bookDetails ) => { return bookDetails.id === updatedDetails.id }
+            );
+            if (updateIndex >= 0 ){
+                Object.assign( this.bookList[updateIndex], updatedDetails);
+            }
         }
      
     },

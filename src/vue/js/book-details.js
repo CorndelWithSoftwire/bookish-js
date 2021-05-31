@@ -52,7 +52,7 @@ let BookDetails = {
         },
         updateSelected() {
             // record new state, start detecting changes again
-            Object.assign(this.originalBookDetails, this.bookDetails);
+            Object.assign(this.originalBookDetails, this.activeBookDetails);
             // notify changes
             this.$emit('detailsUpdated', this.activeBookDetails);
         },
