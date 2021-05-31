@@ -24,7 +24,9 @@ let bookishApp = new Vue({
         </ol>
 
         <book-details v-if="showDetails" v-bind:bookDetails="selectedBook"></book-details>
-        <book-review v-if="!showDetails" v-bind:bookDetails="selectedBook"></book-review>
+        <book-review v-if="!showDetails" 
+                     v-on:save-review="saveReview"
+                     v-bind:bookDetails="selectedBook"></book-review>
     </div>
     `,
     computed: {
@@ -39,6 +41,9 @@ let bookishApp = new Vue({
         selectBook : function(clickedBook) {
             Object.assign( this.selectedBook, clickedBook);
             this.showDetails = !this.showDetails;
+        },
+        saveReview : function(review){
+            console.log( "Review to be saved = " + JSON.stringify( review));
         }
 
     },
