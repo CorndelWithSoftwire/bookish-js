@@ -20,12 +20,15 @@ let bookishApp = new Vue({
                       >
             </book-item>
         </ol>
-        <book-details v-bind:bookDetails="selectedBook" v-bind:key="selectedBook.id" ></book-details>
+        <book-details v-bind:bookDetails="selectedBook" v-on:detailsUpdated="updateBook" ></book-details>
     </div>
     `,
     methods: {
         selectBook : function(clickedBook) {
             this.selectedBook = clickedBook;
+        },
+        updateBook : function(updatedDetails) {
+            console.log("need to update list " + JSON.stringify(updatedDetails) );
         }
      
     },
