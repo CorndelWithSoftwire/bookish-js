@@ -29,6 +29,18 @@ let bookishApp = new Vue({
                      v-bind:bookDetails="selectedBook"></book-review>
     </div>
     `,
+    mounted() {
+        axios.get("/books").then(
+            (response) => { 
+                this.bookList = response.data; 
+            }
+        ).catch(
+            (e) => {
+                    // TODO: add an error display function, get something on screen while developing
+                    this.bookList = [ { author: "none", title: e.message}];
+                }
+        )
+    },
     computed: {
         // a computed getter
         filteredBookList: function () {
