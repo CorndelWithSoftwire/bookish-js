@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }} with {{x}}</h1>
+    <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -35,9 +35,6 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
-  },
-  data(){
-    return { x: 35};
   }
 }
 </script>
@@ -46,8 +43,6 @@ export default {
 <style scoped>
 h3 {
   margin: 40px 0 0;
-  color: #b942a5;
-  background-color: yellowgreen;
 }
 ul {
   list-style-type: none;
@@ -58,6 +53,6 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #b942a5;
+  color: #42b983;
 }
 </style>
