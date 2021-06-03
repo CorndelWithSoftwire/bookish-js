@@ -43,6 +43,8 @@ export default {
 <style scoped>
 h3 {
   margin: 40px 0 0;
+  color: #b942a5;
+  background-color: yellowgreen;
 }
 ul {
   list-style-type: none;
