@@ -1,10 +1,14 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
+    <v-app-bar 
+      :collapse="!collapseOnScroll"
+      :collapse-on-scroll="collapseOnScroll"
+      absolute
+      app 
+      color="primary" 
       dark
-    >
+      scroll-target="#main"
+      >
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
@@ -15,6 +19,12 @@
           width="40"
         />
 
+        <v-checkbox
+          v-model="collapseOnScroll"
+          color="white"
+          hide-details
+        ></v-checkbox>
+       
         <v-img
           alt="Vuetify Name"
           class="shrink mt-1 hidden-sm-and-down"
@@ -23,8 +33,8 @@
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
           width="100"
         />
+       
       </div>
-
       <v-spacer></v-spacer>
 
       <v-btn
@@ -35,26 +45,29 @@
         <span class="mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
-    </v-app-bar>
+    </v-app-bar>  
+    <v-sheet id="main"    
+      class="overflow-y-auto"
+      max-height="600">   
+          <HelloWorld/>  
+    </v-sheet>
 
-    <v-main>
-      <HelloWorld/>
-    </v-main>
+    
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import HelloWorld from "./components/HelloWorld";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
     HelloWorld,
   },
 
   data: () => ({
-    //
+    collapseOnScroll: true,
   }),
 };
 </script>
