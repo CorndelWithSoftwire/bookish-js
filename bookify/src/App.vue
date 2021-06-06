@@ -2,7 +2,7 @@
   <v-app >
     <v-app-bar
       app
-      color="white"
+      color="teal lighten-1"
       flat
     >
       <v-container class="py-0 fill-height">
@@ -34,11 +34,11 @@
       </v-container>
     </v-app-bar>
 
-    <v-main class="grey lighten-3">
+    <v-main class="teal lighten-5">
       <v-container>
         <v-row>
-          <v-col cols="2">
-            <v-sheet rounded="lg">
+          <v-col cols="5">
+            <v-sheet rounded="xl">
               <v-list color="transparent">
                 <v-list-item
                   v-for="n in 5"
@@ -71,7 +71,7 @@
           <v-col>
             <v-sheet
               min-height="70vh"
-              rounded="lg"
+              rounded="xl"
             >
               <!--  -->
             </v-sheet>
