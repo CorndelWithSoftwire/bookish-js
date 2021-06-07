@@ -55,7 +55,26 @@
 
           <v-col>
             <v-sheet min-height="70vh" rounded="xl">
-              <!--  -->
+              <v-card :loading="loading" class="mx-auto my-12" max-width="374">
+                <v-card-title>{{ selectedBook.title }}</v-card-title>
+                <v-card-text>
+                  <v-row align="center" class="mx-0">
+                    <div class="my-4 text-subtitle-1">
+                      {{ selectedBook.author }}
+                    </div>
+                  </v-row>
+                  <v-row align="center" class="mx-0">
+                    <v-chip :color=selectedAvailableColor dark>
+                      {{ selectedBook.available + "/" + selectedBook.copies }}
+                    </v-chip>
+                  </v-row>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn color="primary" text @click="reserve">
+                    Reserve
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
             </v-sheet>
           </v-col>
         </v-row>
@@ -72,7 +91,7 @@ export default {
   components: {},
 
   data: () => ({
-    search: '',
+    search: "",
     headers: [
       {
         text: "Author",
@@ -84,6 +103,7 @@ export default {
       { text: "Copies", value: "copies", sortable: false },
     ],
     bookList: mockData,
+    selectedBook: mockData[0],
     links: ["Catalogue", "Messages", "Profile"],
   }),
   methods: {
@@ -91,6 +111,12 @@ export default {
       return item.available > 0 ? "green" : "red";
     },
   },
+  computed: {
+    selectedAvailableColor() {
+      debugger;
+      return this.getCopiesColor(this.selectedBook);
+    }
+  }
 };
 
 let mockData = [
