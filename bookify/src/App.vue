@@ -44,6 +44,7 @@
               item-key="id"
               :items-per-page="5"
               class="rounded-xl"
+              @click:row="selectBook"
             >
               <template v-slot:[`item.copies`]="{ item }">
                 <v-chip :color="getCopiesColor(item)" dark>
@@ -70,7 +71,7 @@
                   </v-row>
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn color="primary" text @click="reserve">
+                  <v-btn color="primary" text @click="reserveBook">
                     Reserve
                   </v-btn>
                 </v-card-actions>
@@ -92,6 +93,7 @@ export default {
 
   data: () => ({
     search: "",
+    loading: false,
     headers: [
       {
         text: "Author",
@@ -110,10 +112,16 @@ export default {
     getCopiesColor(item) {
       return item.available > 0 ? "green" : "red";
     },
+    selectBook(row){
+         // take copy, eventually may edit this
+         this.selectedBook = Object.assign({}, row);
+    },
+    reserveBook(item){
+       console.log("request to reserve " + item);
+    }
   },
   computed: {
     selectedAvailableColor() {
-      debugger;
       return this.getCopiesColor(this.selectedBook);
     }
   }
