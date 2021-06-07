@@ -26,9 +26,21 @@
       <v-container>
         <v-row>
           <v-col cols="5">
+            <v-card-title>
+              Catalogue
+              <v-spacer></v-spacer>
+              <v-text-field
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="Search"
+                single-line
+                hide-details
+              ></v-text-field>
+            </v-card-title>
             <v-data-table
               :headers="headers"
               :items="bookList"
+              :search="search"
               item-key="id"
               :items-per-page="5"
               class="rounded-xl"
@@ -59,8 +71,8 @@ export default {
 
   components: {},
 
-
   data: () => ({
+    search: '',
     headers: [
       {
         text: "Author",
@@ -72,13 +84,13 @@ export default {
       { text: "Copies", value: "copies", sortable: false },
     ],
     bookList: mockData,
+    links: ["Catalogue", "Messages", "Profile"],
   }),
   methods: {
-    getCopiesColor(item){
-        return item.available > 0 ? "green":"red";
-        
-    }
-  }
+    getCopiesColor(item) {
+      return item.available > 0 ? "green" : "red";
+    },
+  },
 };
 
 let mockData = [
