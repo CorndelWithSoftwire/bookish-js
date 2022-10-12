@@ -1,5 +1,5 @@
 
-import BookController from './controllers/bookController';
+import BookController from './controllers/bookController.js';
 import express from 'express';
 
 const app = express();

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Bookish using mssql",
   "main": "index.js",
+  "type" : "module",
   "scripts": {
     "build": "babel ./src --out-dir dist/ --ignore ./.git,./node_modules,./.babelrc,./package.json,./npm-debug.log,./sql,./README.md ",
     "start": "npm run build && node dist/index.js",
