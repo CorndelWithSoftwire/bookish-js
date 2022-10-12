@@ -1,7 +1,13 @@
 
 
--- delete bookish database
+-- delete bookish database, dropping connections first
 
-DROP DATABASE bookish
+ use master 
+ go
+
+ alter database bookish set single_user with rollback immediate
+ GO
+
+drop database bookish
 GO
 

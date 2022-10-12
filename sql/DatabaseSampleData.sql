@@ -1,5 +1,7 @@
 -- Generated in Excel from books.csv using:
 --	=CONCATENATE("INSERT INTO books(title, author, isbn) VALUES('",SUBSTITUTE([@title], "'","''"),"', '",SUBSTITUTE([@author], "'","''"),"', '", [@isbn], "')")
+USE bookish
+GO
 INSERT INTO books(title, author, isbn) VALUES('The New Manager''s Handbook', 'Morey Stettner ', '')
 INSERT INTO books(title, author, isbn) VALUES('Fun with Advanced Mathematics', 'Lewis Galoo', 'NULL')
 INSERT INTO books(title, author, isbn) VALUES('Fun with Further Mathematics', 'Lewis Galoo', 'NULL')
@@ -590,3 +592,4 @@ INSERT INTO books(title, author, isbn) VALUES('Practical Vim', 'Drew Neil', '')
 
 -- Create a copy for every book
 INSERT INTO copies(bookid) SELECT id FROM books
+GO
