@@ -19,8 +19,7 @@ class BookController {
         if ( id == 0 ){
             throw ( "bad id");
         }
-        const mock = { "id" : id, "title" : "mock", "author" : "lewis" };
-        response.status(200).send(JSON.stringify(mock) );
+        response.status(500).send({"message" : "please try later" } );
     }
 }
 
