@@ -11,18 +11,18 @@ class BookController {
         this.router.post('/', (request, response) => this.addBook(request, response) );
     }
 
-    getAllBooks(request, response) {
+    async getAllBooks(request, response) {
       
-        this.bookRepository.getAllBooks()
-            .then(books => {
-                response.status(200).send(books);
-            })
-            .catch(error => BookController.errorResponse(response, error));
+        let books = await this.bookRepository.getAllBooks()
+         
+        response.status(200).send(books);
+        // TODO add error handling
     }
 
-    getBook(request, response, next) {
+    async getBook(request, response, next) {
         const id = request.params.id;
-        // TODO - get one book from repository
+        // TODO use id to get one book from repository
+        
         throw "getBook not yet implemented"
     }
 

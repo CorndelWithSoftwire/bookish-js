@@ -7,18 +7,18 @@ export default class BookRepository {
       // TODO implement
     }
 
-    getBookById(id) {
+    async getBookById(id) {
         console.log("get book " + id);
-        return executeSql('SELECT * FROM books WHERE id = @bookid', { 'bookid' : id} )
-            .then(result => {
-                let books = result.recordset;
-                if ( books.length < 1) {
-                    return null;
-                }
+        let result = await executeSql('SELECT * FROM books WHERE id = @bookid', { 'bookid' : id} )
+            
+        let books = result.recordset;
+        if ( books.length < 1) {
+            return null;
+        }
                      
-                let book = books[0];
-                return new Book(book.id, book.title, book.author, book.isbn);
-            });
+        let book = books[0];
+        return new Book(book.id, book.title, book.author, book.isbn);
+        
     }
 
     addBook(book) {
