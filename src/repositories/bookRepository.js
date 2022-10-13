@@ -3,20 +3,15 @@ import Book from '../models/book.js';
 
 export default class BookRepository {
     getAllBooks() {
-        return executeSql('SELECT * FROM books')
-            .then(result => {
-                let books = result.recordsets[0];
-                return books.map(book => {
-                    return new Book(book.id, book.title, book.author, book.isbn);
-                });
-            });
+      throw "book repository all books query not yet implemented"
+      // TODO implement
     }
 
     getBookById(id) {
         console.log("get book " + id);
         return executeSql('SELECT * FROM books WHERE id = @bookid', { 'bookid' : id} )
             .then(result => {
-                let books = result.recordsets[0];
+                let books = result.recordset;
                 if ( books.length < 1) {
                     return null;
                 }
@@ -27,19 +22,8 @@ export default class BookRepository {
     }
 
     addBook(book) {
-        return executeSql('INSERT INTO books(title, author, isbn) OUTPUT INSERTED.id VALUES(@title, @author, @isbn)',
-            { 'title': book.title, 'author': book.author, 'isbn': book.isbn})
-            .then(result => {
-                console.log("inserted: " + JSON.stringify(result) );
-                let insertOutputRows = result.recordsets[0];
-                if ( insertOutputRows.length < 1) {
-                    return null;
-                }
-                     
-                return insertOutputRows[0].id;
-            });
-            
-            ;
+        throw "add book not implemented"
+        //TODO implement, need to find id of inserted book
     }
 
 

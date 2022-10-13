@@ -12,8 +12,7 @@ class BookController {
     }
 
     getAllBooks(request, response) {
-        // authenticated user passed on by passport
-        console.log( "User: " +  ( ('user' in request) ? JSON.stringify(request.user) : "unknown" )  );
+      
         this.bookRepository.getAllBooks()
             .then(books => {
                 response.status(200).send(books);
@@ -23,39 +22,13 @@ class BookController {
 
     getBook(request, response, next) {
         const id = request.params.id;
-        this.bookRepository.getBookById(id)
-            .then(book => {
-                if ( book ) {
-                    response.status(200).send(book);
-                } else {
-                    var err = 'Not found, id = ' + id;
-                    response.status(404).send(err);
-                }
-            })
-            .catch(error => BookController.errorResponse(response, error));
+        // TODO - get one book from repository
+        throw "getBook not yet implemented"
     }
 
     addBook(request, response) {
-        const book = BookController.getBookFromRequest(request);
-        if (!book) {
-            response.status(400).send({ errors: ['Invalid book']});
-        } else {
-        this.bookRepository.addBook(book)
-            .then((id) => {
-                console.log("inserted " + id); 
-                const  reference = request.protocol + '://' + request.get('host') + request.originalUrl + "/" + id;
-                const responseBody = {
-                    "message" : "Book added successfully",
-                    "id" : id,
-                    "reference" : reference
-                };
-                
-                response.status(201)
-                      .set('Location', reference)
-                      .send( JSON.stringify( responseBody) );
-            })
-            .catch(error => BookController.errorResponse(response, error));
-        }
+       throw "addBook is not yet implemented";
+       // TODO ask repository to add book and get its id
     }
 
     static errorResponse(response, error) {
