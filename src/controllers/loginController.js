@@ -1,5 +1,5 @@
-import UserRepository from '../repositories/userRepository';
-import { createTokenForUser } from '../helpers/tokenHelper';
+import UserRepository from '../repositories/userRepository.js';
+import { createTokenForUser } from '../helpers/tokenHelper.js';
 
 import express from 'express';
 

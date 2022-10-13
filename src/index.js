@@ -1,7 +1,7 @@
-import BookController from './controllers/bookController';
-import LoginController from './controllers/loginController';
-import UserRepository from "./repositories/userRepository";
-import { secret } from './config';
+import BookController from './controllers/bookController.js';
+import LoginController from './controllers/loginController.js';
+import UserRepository from "./repositories/userRepository.js";
+import { secret } from './config.js';
 
 import express from 'express';
 import passport from 'passport';

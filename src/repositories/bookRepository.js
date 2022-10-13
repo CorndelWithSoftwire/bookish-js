@@ -1,5 +1,5 @@
-import {executeSql} from '../helpers/dbHelper';
-import Book from '../models/book';
+import {executeSql} from '../helpers/dbHelper.js';
+import Book from '../models/book.js';
 
 export default class BookRepository {
     getAllBooks() {

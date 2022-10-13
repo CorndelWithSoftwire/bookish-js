@@ -1,9 +1,9 @@
 
 // helper for database access    
 
-    import { mssqlConnectionConfig } from "../config";
+    import { mssqlConnectionConfig } from "../config.js";
 
-    const mssql = require('mssql');
+  import mssql from 'mssql';
 
     const dbPool = new mssql.ConnectionPool(mssqlConnectionConfig)
     dbPool.on('error', err => {

@@ -1,4 +1,4 @@
-import BookRepository from '../repositories/bookRepository';
+import BookRepository from '../repositories/bookRepository.js';
 
 import express from 'express';
 

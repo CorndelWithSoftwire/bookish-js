@@ -1,6 +1,6 @@
 
-import {executeSql} from '../helpers/dbHelper';
-import User from '../models/user';
+import {executeSql} from '../helpers/dbHelper.js';
+import User from '../models/user.js';
 
 export default class UserRepository {
     // validate username/password
