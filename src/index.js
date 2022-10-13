@@ -4,6 +4,7 @@ import UserRepository from "./repositories/userRepository.js";
 import { secret } from './config.js';
 
 import express from 'express';
+import bodyParser from "body-parser";
 import passport from 'passport';
 import passportJwt from 'passport-jwt';
 
@@ -12,6 +13,8 @@ const app = express();
 configurePassportToAuthenticateTokens();
 
 app.use(passport.initialize());
+app.use(bodyParser.json());
+
 app.use('/login', LoginController);
 app.use('/books', passport.authenticate('jwt', {session: false}), BookController);
 
@@ -33,6 +36,6 @@ function configurePassportToAuthenticateTokens() {
         userRepository.getUserByName(decodedJwt.username)
             .then(user => {
                 next(null, user);
-            });
+            }).catch( e => next(null, null, e) );
     }));
 }
