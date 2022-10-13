@@ -29,7 +29,26 @@ Note: no --copy-files needed, and if included takes precendence over --ignore
 
 npm i express
 
+### Enable MS SQL Server access 
+
+npm install mssql
 
 
 
 Copyright © 2017 Softwire - All Rights Reserved
+
+## Setting up Part 4
+
+### Install JWT
+
+npm i jsonwebtoken
+
+### Install passport
+
+npm i passport passport-jwt
+
+Notes:
+
+- Passport code all in index.js, controllers not aware of passport
+- Passport passes user information in request to controllers
+- User object does not contain password, checking done in database not in cod

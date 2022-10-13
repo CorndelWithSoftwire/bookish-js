@@ -1,28 +1,22 @@
+import BookRepository from '../repositories/bookRepository';
 
 import express from 'express';
 
 class BookController {
     constructor() {
+        this.bookRepository = new BookRepository();
         this.router = express.Router();
         this.router.get('/', (request, response) => this.getAllBooks(request, response) );
-        this.router.get('/:id', (request, response) => this.getBook(request, response) );
     }
 
     getAllBooks(request, response) {
-        console.log( "request for all books" + request.url );
-        response.status(500).send({"message" : "please try later" } );
-    }
-
-    getBook(request, response) {
-        const id = request.params.id;
-        console.log( "request for book " + id );
-        if ( id == 0 ){
-            throw ( "bad id");
-        }
-        const mock = { "id" : id, "title" : "mock", "author" : "lewis" };
-        response.status(200).send(JSON.stringify(mock) );
+        // authenticated user passed on by passport
+        console.log( "User: " +  ( ('user' in request) ? JSON.stringify(request.user) : "unknown" )  );
+        this.bookRepository.getAllBooks()
+            .then(books => {
+                response.status(200).send(books);
+            });
     }
 }
 
 export default new BookController().router;
-
