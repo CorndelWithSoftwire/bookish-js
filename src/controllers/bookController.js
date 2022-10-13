@@ -23,11 +23,11 @@ class BookController {
         const id = request.params.id;
         // TODO use id to get one book from repository
         
-        throw "getBook not yet implemented"
+        response.status(500).send("getBook not implemented");
     }
 
     addBook(request, response) {
-       throw "addBook is not yet implemented";
+        response.status(500).send("getBook not implemented");
        // TODO ask repository to add book and get its id
     }
 
