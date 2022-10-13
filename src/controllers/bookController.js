@@ -1,5 +1,5 @@
 import BookRepository from '../repositories/bookRepository.js';
-
+import Book from '../models/book.js';
 import express from 'express';
 
 class BookController {
