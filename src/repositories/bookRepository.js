@@ -5,7 +5,7 @@ export default class BookRepository {
     getAllBooks() {
         return executeSql('SELECT * FROM books')
             .then(result => {
-                let books = result.recordsets[0];
+                let books = result.recordset;
                 return books.map(book => {
                     return new Book(book.id, book.title, book.author, book.isbn);
                 });
@@ -16,7 +16,7 @@ export default class BookRepository {
         console.log("get book " + id);
         return executeSql('SELECT * FROM books WHERE id = @bookid', { 'bookid' : id} )
             .then(result => {
-                let books = result.recordsets[0];
+                let books = result.recordset;
                 if ( books.length < 1) {
                     return null;
                 }
@@ -31,7 +31,7 @@ export default class BookRepository {
             { 'title': book.title, 'author': book.author, 'isbn': book.isbn})
             .then(result => {
                 console.log("inserted: " + JSON.stringify(result) );
-                let insertOutputRows = result.recordsets[0];
+                let insertOutputRows = result.recordset;
                 if ( insertOutputRows.length < 1) {
                     return null;
                 }
