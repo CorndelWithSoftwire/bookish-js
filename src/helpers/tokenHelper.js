@@ -12,7 +12,7 @@ export function isTokenValid(token) {
     }
     try {
         const decoded = jwt.verify(token, secret);
-        return !!decoded;
+        return decoded?.username;
     } catch (e) {
         return false;
     }
